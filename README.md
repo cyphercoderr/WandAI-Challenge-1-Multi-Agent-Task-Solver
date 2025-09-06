@@ -123,69 +123,40 @@ Here’s a sample request where:
 }
 ```
 ## Example Success Response
-```
+```bash
 {
-  "concurrency": 4,
-  "graph": {
-    "nodes": [
-      {
-        "id": "A",
-        "agent": {
-          "name": "echo",
-          "params": {},
-          "tools": []
-        },
-        "inputs": {
-          "msg": "hello from A"
-        },
-        "timeout_seconds": 10,
-        "max_retries": 2
+  "run_id": "498454e7-e10d-4e30-973e-fc2d6f53ac5d",
+  "status": "succeeded",
+  "result": {
+    "B": {
+      "sum": 10,
+      "params": {}
+    },
+    "A": {
+      "echo": {
+        "msg": "hello from A"
       },
-      {
-        "id": "B",
-        "agent": {
-          "name": "sum",
-          "params": {},
-          "tools": []
-        },
-        "inputs": {
-          "numbers": [1, 2, 3, 4]
-        },
-        "timeout_seconds": 10,
-        "max_retries": 2
-      },
-      {
-        "id": "C",
-        "agent": {
-          "name": "http_get",
-          "params": {},
-          "tools": [
-            {
-              "name": "data_fetcher",
-              "config": {
-                "timeout": 5
-              }
-            }
-          ]
-        },
-        "inputs": {
-          "url": "https://example.com"
-        },
-        "timeout_seconds": 10,
-        "max_retries": 2
+      "params": {}
+    },
+    "C": {
+      "status": 200,
+      "length": 1256,
+      "headers": {
+        "Accept-Ranges": "bytes",
+        "Content-Type": "text/html",
+        "Etag": "\"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134\"",
+        "Last-Modified": "Mon, 13 Jan 2025 20:11:20 GMT",
+        "Vary": "Accept-Encoding",
+        "Content-Encoding": "gzip",
+        "Cache-Control": "max-age=86000",
+        "Date": "Sat, 06 Sep 2025 20:52:14 GMT",
+        "Alt-Svc": "h3=\":443\"; ma=93600,h3-29=\":443\"; ma=93600",
+        "Content-Length": "648",
+        "Connection": "keep-alive"
       }
-    ],
-    "edges": [
-      {
-        "source": "A",
-        "target": "C"
-      },
-      {
-        "source": "B",
-        "target": "C"
-      }
-    ]
-  }
+    }
+  },
+  "error": null
 }
 
 ```
