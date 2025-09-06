@@ -160,13 +160,18 @@ Here’s a sample request where:
 }
 
 ```
-## Design Decisions & Trade-offs
+## Design Decisions
+* Orchestrator executes DAGs layer-by-layer with concurrency (`asyncio` + `networkx`).
+* Retries with exponential backoff (`tenacity`) ensure robustness.
+* Timeouts handled via `asyncio.wait_for` to prevent stuck nodes.
+* Agents and tools are modular via registries for easy extensibility.
 
-* In-memory run store → for speed (swap with Redis/Postgres for prod)
-* Simple registries → lightweight, could evolve into plugin system
-* Single-process asyncio → sufficient for demo, extend with Celery/RQ for scaling
-* No auth → add OAuth/JWT & RBAC for enterprise
-* Minimal logging → expand with OpenTelemetry + structured logs
+## Trade-offs (24h Constraint)
+* In-memory run store for speed → would use Redis/Postgres in production.
+* Minimal logging/metrics to save time → production would need structured logs & observability.
+* No authentication layer → acceptable for prototype, enterprise setup would need OAuth/JWT.
+* Single-process asyncio execution → good enough here, but a distributed queue (Celery/RQ) is better at scale.
+
 
 ## Extending
 
