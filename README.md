@@ -1,4 +1,4 @@
-# Wand AI Backend Engineer – Challenge 1: Multi-Agent Task Solver
+# Wand AI – Challenge 1: Multi-Agent Task Solver
 
 A minimal, production-lean prototype of an **agent orchestration layer** built with  
 **Python + FastAPI + asyncio**.
@@ -6,8 +6,7 @@ A minimal, production-lean prototype of an **agent orchestration layer** built w
 ---
 
 ## Note
-The agents provided here (Echo, Sum, HttpGet) are **hardcoded sample agents** to mimic real-time conversation behavior.  
-They demonstrate orchestration mechanics, not domain logic.
+The agents provided here (Echo, Sum, HttpGet) are **hardcoded sample agents** to mimic real-time conversation behavior. They demonstrate orchestration mechanics, not domain logic.
 
 ---
 
