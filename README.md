@@ -125,22 +125,69 @@ Here’s a sample request where:
 ## Example Success Response
 ```
 {
-  "run_id": "6d28b11d-1268-4931-9dee-a0f45b5f686e",
-  "status": "succeeded",
-  "result": {
-    "A": { "echo": { "msg": "hello from A" }, "params": {} },
-    "B": { "sum": 10, "params": {} },
-    "C": {
-      "status": 200,
-      "length": 1256,
-      "headers": {
-        "Content-Type": "text/html",
-        "Date": "Sat, 06 Sep 2025 08:19:47 GMT"
+  "concurrency": 4,
+  "graph": {
+    "nodes": [
+      {
+        "id": "A",
+        "agent": {
+          "name": "echo",
+          "params": {},
+          "tools": []
+        },
+        "inputs": {
+          "msg": "hello from A"
+        },
+        "timeout_seconds": 10,
+        "max_retries": 2
+      },
+      {
+        "id": "B",
+        "agent": {
+          "name": "sum",
+          "params": {},
+          "tools": []
+        },
+        "inputs": {
+          "numbers": [1, 2, 3, 4]
+        },
+        "timeout_seconds": 10,
+        "max_retries": 2
+      },
+      {
+        "id": "C",
+        "agent": {
+          "name": "http_get",
+          "params": {},
+          "tools": [
+            {
+              "name": "data_fetcher",
+              "config": {
+                "timeout": 5
+              }
+            }
+          ]
+        },
+        "inputs": {
+          "url": "https://example.com"
+        },
+        "timeout_seconds": 10,
+        "max_retries": 2
       }
-    }
-  },
-  "error": null
+    ],
+    "edges": [
+      {
+        "source": "A",
+        "target": "C"
+      },
+      {
+        "source": "B",
+        "target": "C"
+      }
+    ]
+  }
 }
+
 ```
 ## Design Decisions & Trade-offs
 

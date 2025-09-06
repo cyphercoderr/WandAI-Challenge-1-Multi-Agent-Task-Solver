@@ -43,3 +43,7 @@ async def health():
 @app.get("/favicon.ico", include_in_schema=False)
 async def favicon():
     return FileResponse("app/favicon.ico")
+
+@app.get("/")
+async def root():
+    return {"message": "Welcome to WandAI Challenge 1 API — see /docs for interactive docs"}
